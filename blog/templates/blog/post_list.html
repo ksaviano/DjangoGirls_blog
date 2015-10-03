@@ -1,35 +1,15 @@
-<!DOCTYPE HTML>
+{% extends "blog/base.html" %}
 
-<html>
-    <head>
-        <title>Kimberly's Blog</title>
-        <style>
-            .published {
-                font-size: small;
-                color: grey;
-            }
-
-            .author {
-                font-size: small;
-                font-style: italic;
-                color: hotpink;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
-
-        {% for post in posts %}
-            <div>
-                <p class="published">published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaks }}</p>
-                <p class="author">by: {{ post.author }}</p>
-                <hr>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="published">
+                {{ post.published_date }}
             </div>
-        {% endfor %}
-    </body>
-</html>
+            <h1><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaks }}</p>
+            <p class="author">by: {{ post.author }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock content %}
